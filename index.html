@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحقق من كلمة السر</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        #password-box, #name-box { display: none; }
+        #enter-chat { padding: 10px 20px; background-color: #007bff; color: #fff; border: none; cursor: pointer; font-size: 16px; }
+        #password-input, #name-input { padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>مرحباً بك في موقع الدردشة العامة!</h1>
+    <div id="password-box">
+        <input type="password" id="password-input" placeholder="أدخل كلمة السر">
+        <button id="submit-password">تأكيد</button>
+    </div>
+    <div id="name-box">
+        <input type="text" id="name-input" placeholder="أدخل اسمك">
+        <button id="submit-name">تأكيد</button>
+    </div>
+    <button id="enter-chat">اضغط للدخول للدردشة العامة</button>
+
+    <script>
+        const correctPassword = '2024';
+        const passwordBox = document.getElementById('password-box');
+        const nameBox = document.getElementById('name-box');
+        const enterChatButton = document.getElementById('enter-chat');
+        const passwordInput = document.getElementById('password-input');
+        const nameInput = document.getElementById('name-input');
+        const submitPasswordButton = document.getElementById('submit-password');
+        const submitNameButton = document.getElementById('submit-name');
+
+        let userName = '';
+
+        passwordBox.style.display = 'none';
+        nameBox.style.display = 'none';
+
+        enterChatButton.addEventListener('click', () => {
+            passwordBox.style.display = 'block';
+            enterChatButton.style.display = 'none';
+        });
+
+        submitPasswordButton.addEventListener('click', () => {
+            const enteredPassword = passwordInput.value;
+            if (enteredPassword === correctPassword) {
+                passwordBox.style.display = 'none';
+                nameBox.style.display = 'block';
+            } else {
+                alert('كلمة السر غير صحيحة');
+            }
+        });
+
+        submitNameButton.addEventListener('click', () => {
+            userName = nameInput.value.trim();
+            if (userName !== '') {
+                localStorage.setItem('userName', userName);
+                window.location.href = 'chat.html';
+            } else {
+                alert('يرجى إدخال اسمك');
+            }
+        });
+    </script>
+
+</body></html>
